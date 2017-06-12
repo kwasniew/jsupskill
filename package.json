@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "mocha": "mocha test/mocha/*Test.js",
+    "tape": "tape test/tape/*Test.js",
+    "jest": "jest --env=node test/jest",
+    "test": "npm run mocha && npm run tape && npm run jest"
+  },
+  "devDependencies": {
+    "benchmark": "2.1.4",
+    "jest": "20.0.4",
+    "mocha": "3.4.2",
+    "tape": "4.6.3"
+  }
+}
