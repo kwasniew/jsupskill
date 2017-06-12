@@ -67,7 +67,7 @@ How does the [Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/
 
 In this exercise we gonna implement our own equivalent of the new operator.
 
-We gonna work in exercise/newTest.js
+We gonna work in newTest.js
 
 What is new doing under the hood?
 * it creates a new object
