@@ -3,11 +3,15 @@ var isObject = require('./isObject');
 
 module.exports = function eq(x, y) {
     // ===
+    // 1 == 1
+    // Goo metaphore: === w/o coercion,
+    // == with coercion
     if (typeof x === typeof y) {
         return x === y;
     }
 
     // null/undefined normalized
+    // x == null
     if (x === null && y === undefined) {
         return true;
     }
@@ -17,6 +21,7 @@ module.exports = function eq(x, y) {
     }
 
     // number == Number(string)
+    // 1 == '1'
     if (typeof x === 'number' && typeof y === 'string') {
         return eq(x, Number(y));
     }
@@ -25,7 +30,8 @@ module.exports = function eq(x, y) {
         return eq(Number(x), y);
     }
 
-    // x == Number(boolean)
+    // anything == Number(boolean)
+    // 1 == true
     if (typeof x === 'boolean') {
         return eq(Number(x), y);
     }
@@ -35,6 +41,7 @@ module.exports = function eq(x, y) {
     }
 
     // string|number == ToPrimitive(object)
+    // 1 == {}
     if ((typeof x === 'string' ||
         typeof x === 'number' ||
         typeof x === 'symbol') &&

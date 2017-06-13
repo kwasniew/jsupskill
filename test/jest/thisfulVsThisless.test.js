@@ -1,6 +1,6 @@
 var {Programmer1, Programmer2, Programmer3, createProgrammer} = require('../../src/programmer');
 
-test.skip('thisful with .prototype', function () {
+test('thisful with .prototype', function () {
     var programmer = new Programmer1();
 
     programmer.learnNewLanguage('Java');
@@ -10,7 +10,7 @@ test.skip('thisful with .prototype', function () {
     expect(programmer.isPragmatic()).toBeTruthy();
 });
 
-test.skip('thisful with class', function () {
+test('thisful with class', function () {
     var programmer = new Programmer2();
 
     programmer.learnNewLanguage('Java');
@@ -21,7 +21,7 @@ test.skip('thisful with class', function () {
 });
 
 // no class and .prototype allowed
-test.skip('thisful with Object.create()', function () {
+test('thisful with Object.create()', function () {
     var programmer = Object.create(Programmer3);
     programmer.init();
 
@@ -34,7 +34,7 @@ test.skip('thisful with Object.create()', function () {
 
 // in this exercise you cannot use this
 // only functions and object literals are allowed
-test.skip('thisless', function () {
+test('thisless', function () {
     var programmer = createProgrammer();
 
     programmer.learnNewLanguage('Elm');
