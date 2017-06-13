@@ -2,25 +2,25 @@ var test = require('tape');
 var eq = require('../../src/eq');
 
 
-test.skip('Type(x) is the same as Type(y)', function (t) {
+test('Type(x) is the same as Type(y)', function (t) {
     t.ok(5 == 5);
     t.ok(eq(5, 5));
     t.end();
 });
 
-test.skip('If x is null and y is undefined, return true', function (t) {
+test('If x is null and y is undefined, return true', function (t) {
     t.ok(null == undefined);
     t.ok(eq(null, undefined));
     t.end();
 });
 
-test.skip('If x is undefined and y is null, return true.', function (t) {
+test('If x is undefined and y is null, return true.', function (t) {
     t.ok(undefined == null);
     t.ok(eq(undefined, null), "sdafsafd");
     t.end();
 });
 
-test.skip('If Type(x) is Number and Type(y) is String, return the result of the comparison x == ToNumber(y).', function (t) {
+test('If Type(x) is Number and Type(y) is String, return the result of the comparison x == ToNumber(y).', function (t) {
     t.ok(1 == '1');
     t.ok(1 != '2');
 
@@ -30,7 +30,7 @@ test.skip('If Type(x) is Number and Type(y) is String, return the result of the 
     t.end();
 });
 
-test.skip('If Type(x) is String and Type(y) is Number, return the result of the comparison ToNumber(x) == y.', function (t) {
+test('If Type(x) is String and Type(y) is Number, return the result of the comparison ToNumber(x) == y.', function (t) {
     t.ok('1' == 1);
     t.ok('1' != 2);
 
@@ -40,7 +40,7 @@ test.skip('If Type(x) is String and Type(y) is Number, return the result of the 
     t.end();
 });
 
-test.skip('If Type(x) is Boolean, return the result of the comparison ToNumber(x) == y.', function (t) {
+test('If Type(x) is Boolean, return the result of the comparison ToNumber(x) == y.', function (t) {
     t.ok(true == 1);
     t.ok(false == 0);
 
@@ -50,7 +50,7 @@ test.skip('If Type(x) is Boolean, return the result of the comparison ToNumber(x
     t.end();
 });
 
-test.skip('If Type(y) is Boolean, return the result of the comparison x == ToNumber(y).', function (t) {
+test('If Type(y) is Boolean, return the result of the comparison x == ToNumber(y).', function (t) {
     t.ok(1 == true);
     t.ok(0 == false);
 
@@ -60,7 +60,7 @@ test.skip('If Type(y) is Boolean, return the result of the comparison x == ToNum
     t.end();
 });
 
-test.skip('If Type(x) is either String, Number, or Symbol and Type(y) is Object, return the result of the comparison x == ToPrimitive(y).', function (t) {
+test('If Type(x) is either String, Number, or Symbol and Type(y) is Object, return the result of the comparison x == ToPrimitive(y).', function (t) {
 
     var o4 = {
         valueOf: function (assert) {
@@ -102,7 +102,7 @@ test.skip('If Type(x) is either String, Number, or Symbol and Type(y) is Object,
     t.end();
 });
 
-test.skip('If Type(x) is Object and Type(y) is either String, Number, or Symbol, return the result of the comparison ToPrimitive(x) == y.', function (t) {
+test('If Type(x) is Object and Type(y) is either String, Number, or Symbol, return the result of the comparison ToPrimitive(x) == y.', function (t) {
     var o4 = {
         valueOf() {
             return 1;
@@ -143,7 +143,7 @@ test.skip('If Type(x) is Object and Type(y) is either String, Number, or Symbol,
     t.end();
 });
 
-test.skip('default false', function (t) {
+test('default false', function (t) {
     t.ok({} != undefined);
 
     t.ok(!eq({}, undefined));
@@ -151,7 +151,7 @@ test.skip('default false', function (t) {
     t.end();
 });
 
-test.skip('WTF compliance check', function (t) {
+test('WTF compliance check', function (t) {
     t.ok(!eq('123', true));
     t.ok(eq([], false));
 
@@ -170,7 +170,7 @@ test.skip('WTF compliance check', function (t) {
 
 // don't memorize those
 // don't ask about them in job interviews
-test.skip('some worst offenders', function (t) {
+test('some worst offenders', function (t) {
     t.ok(!eq('0', null)); // null can only coercively equal to undefined
     t.ok(!eq('0', undefined));
     t.ok(eq('0', false)); // gotcha
@@ -202,7 +202,7 @@ test.skip('some worst offenders', function (t) {
     t.end();
 });
 
-test.skip('safe parts', function (t) {
+test('safe parts', function (t) {
     t.ok(!eq(42, '43'));
     t.ok(!eq(42, 'foo'));
     t.ok(!eq(true, 'true'));
@@ -212,3 +212,10 @@ test.skip('safe parts', function (t) {
 
     t.end();
 });
+
+
+// takeaway
+// What's the main source of weird corner cases? ToNumber for []
+// Bad metaphore: === compares values and types, == compares only values
+// Good metaphore: == compares with type coercion, === without type coercion
+// This algorithm likes ToNumber

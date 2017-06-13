@@ -7,17 +7,17 @@ describe('== abstract equality comparison', function () {
         assert.ok(eq(5, 5));
     });
 
-    it.skip('If x is null and y is undefined, return true', function () {
+    it('If x is null and y is undefined, return true', function () {
         assert.ok(null == undefined);
         assert.ok(eq(null, undefined));
     });
 
-    it.skip('If x is undefined and y is null, return true.', function () {
+    it('If x is undefined and y is null, return true.', function () {
         assert.ok(undefined == null);
         assert.ok(eq(undefined, null));
     });
 
-    it.skip('If Type(x) is Number and Type(y) is String, return the result of the comparison x == ToNumber(y).', function () {
+    it('If Type(x) is Number and Type(y) is String, return the result of the comparison x == ToNumber(y).', function () {
         assert.ok(1 == '1');
         assert.ok(1 != '2');
 
@@ -25,7 +25,7 @@ describe('== abstract equality comparison', function () {
         assert.ok(!eq(1, '2'));
     });
 
-    it.skip('If Type(x) is String and Type(y) is Number, return the result of the comparison ToNumber(x) == y.', function () {
+    it('If Type(x) is String and Type(y) is Number, return the result of the comparison ToNumber(x) == y.', function () {
         assert.ok('1' == 1);
         assert.ok('1' != 2);
 
@@ -33,7 +33,7 @@ describe('== abstract equality comparison', function () {
         assert.ok(!eq('1', 2));
     });
 
-    it.skip('If Type(x) is Boolean, return the result of the comparison ToNumber(x) == y.', function () {
+    it('If Type(x) is Boolean, return the result of the comparison ToNumber(x) == y.', function () {
         assert.ok(true == 1);
         assert.ok(false == 0);
 
@@ -41,7 +41,7 @@ describe('== abstract equality comparison', function () {
         assert.ok(eq(false, 0));
     });
 
-    it.skip('If Type(y) is Boolean, return the result of the comparison x == ToNumber(y).', function () {
+    it('If Type(y) is Boolean, return the result of the comparison x == ToNumber(y).', function () {
         assert.ok(1 == true);
         assert.ok(0 == false);
 
@@ -49,7 +49,7 @@ describe('== abstract equality comparison', function () {
         assert.ok(eq(0, false));
     });
 
-    it.skip('If Type(x) is either String, Number, or Symbol and Type(y) is Object, return the result of the comparison x == ToPrimitive(y).', function () {
+    it('If Type(x) is either String, Number, or Symbol and Type(y) is Object, return the result of the comparison x == ToPrimitive(y).', function () {
 
         var o4 = {
             valueOf: function () {
@@ -89,7 +89,7 @@ describe('== abstract equality comparison', function () {
         assert.ok(eq(1, o7));
     });
 
-    it.skip('If Type(x) is Object and Type(y) is either String, Number, or Symbol, return the result of the comparison ToPrimitive(x) == y.', function () {
+    it('If Type(x) is Object and Type(y) is either String, Number, or Symbol, return the result of the comparison ToPrimitive(x) == y.', function () {
         var o4 = {
             valueOf() {
                 return 1;
@@ -128,13 +128,13 @@ describe('== abstract equality comparison', function () {
         assert.ok(eq(o7, 1));
     });
 
-    it.skip('default false', function () {
+    it('default false', function () {
         assert.ok({} != undefined);
 
         assert.ok(!eq({}, undefined));
     });
 
-    it.skip('WTF compliance check', function () {
+    it('WTF compliance check', function () {
         assert.ok(!eq('123', true));
         assert.ok(eq([], false));
 
@@ -151,7 +151,7 @@ describe('== abstract equality comparison', function () {
 
     // don't memorize those
     // don't ask about them in job interviews
-    it.skip('some worst offenders', function () {
+    it('some worst offenders', function () {
         assert.ok(!eq('0', null)); // null can only coercively equal to undefined
         assert.ok(!eq('0', undefined));
         assert.ok(eq('0', false)); // gotcha
@@ -179,9 +179,11 @@ describe('== abstract equality comparison', function () {
         assert.ok(!eq(0, NaN));
         assert.ok(eq(0, []));
         assert.ok(!eq(0, {}));
+
+        // takeaway: never use ==true and ==false in your code
     });
 
-    it.skip('safe parts', function () {
+    it('safe parts', function () {
         assert.ok(!eq(42, '43'));
         assert.ok(!eq(42, 'foo'));
         assert.ok(!eq(true, 'true'));
@@ -191,3 +193,8 @@ describe('== abstract equality comparison', function () {
     });
 });
 
+// takeaway
+// What's the main source of weird corner cases? ToNumber for []
+// Bad metaphore: === compares values and types, == compares only values
+// Good metaphore: == compares with type coercion, === without type coercion
+// This algorithm likes ToNumber

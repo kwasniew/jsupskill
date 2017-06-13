@@ -1,3 +1,5 @@
 module.exports = function isObject(value) {
-    // TODO: your code goes here
+    return (value !== null) &&
+        ((typeof value === 'object') ||
+        (typeof value === 'function'));
 };
