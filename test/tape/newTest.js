@@ -31,7 +31,7 @@ test('allows to create new objects', function (t) {
     t.end();
 });
 
-test.skip('allows to create new objects - own implementation - happy path', function (t) {
+test('allows to create new objects - own implementation - happy path', function (t) {
     var p1 = NEW(Person, ['Mateusz']);
 
     t.equal(p1.sayHi(), 'Hi, I am Mateusz');
@@ -39,7 +39,7 @@ test.skip('allows to create new objects - own implementation - happy path', func
     t.end();
 });
 
-test.skip('allows to create new objects - own implementation - constructor fn returns object', function (t) {
+test('allows to create new objects - own implementation - constructor fn returns object', function (t) {
     var p2 = NEW(AnotherPerson, ['Mateusz']);
 
     t.deepEqual(p2, {});
@@ -47,7 +47,7 @@ test.skip('allows to create new objects - own implementation - constructor fn re
     t.end();
 });
 
-test.skip('allows to create new objects - own implementation - constructor function returns primitive value', function (t) {
+test('allows to create new objects - own implementation - constructor function returns primitive value', function (t) {
     var p3 = NEW(NullPerson, ['Mateusz']);
 
     t.ok(p3 instanceof NullPerson);

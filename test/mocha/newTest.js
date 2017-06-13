@@ -30,19 +30,19 @@ describe('NEW', function () {
         assert.ok(p3 instanceof NullPerson);
     });
 
-    it.skip('allows to create new objects - own implementation - happy path', function () {
+    it('allows to create new objects - own implementation - happy path', function () {
         var p1 = NEW(Person, ['Mateusz']);
 
         assert.equal(p1.sayHi(), 'Hi, I am Mateusz');
     });
 
-    it.skip('allows to create new objects - own implementation - constructor fn returns object', function () {
+    it('allows to create new objects - own implementation - constructor fn returns object', function () {
         var p2 = NEW(AnotherPerson, ['Mateusz']);
 
         assert.deepEqual(p2, {});
     });
 
-    it.skip('allows to create new objects - own implementation - constructor function returns primitive value', function () {
+    it('allows to create new objects - own implementation - constructor function returns primitive value', function () {
         var p3 = NEW(NullPerson, ['Mateusz']);
 
         assert.ok(p3 instanceof NullPerson);
